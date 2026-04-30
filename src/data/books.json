@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "The Last Lighthouse",
+    "author": "Mara Ellison",
+    "description": "A coastal family uncovers buried secrets while trying to save a fading harbor town.",
+    "category": "Story",
+    "available_quantity": 7,
+    "image_url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 2,
+    "title": "Midnight at Willow House",
+    "author": "Jonah Pierce",
+    "description": "A quiet inheritance becomes a race to understand the past before it reshapes the present.",
+    "category": "Story",
+    "available_quantity": 4,
+    "image_url": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 3,
+    "title": "Practical Next.js Systems",
+    "author": "Avery Chen",
+    "description": "Modern patterns for building fast, maintainable web applications with the Next.js app router.",
+    "category": "Tech",
+    "available_quantity": 11,
+    "image_url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 4,
+    "title": "MongoDB in Action",
+    "author": "Nina Patel",
+    "description": "A hands-on guide to designing reliable data models, indexes, and scalable queries.",
+    "category": "Tech",
+    "available_quantity": 6,
+    "image_url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 5,
+    "title": "The Curious Orbit",
+    "author": "Elliot Vega",
+    "description": "A vivid journey through planetary motion, cosmic distances, and the science of observation.",
+    "category": "Science",
+    "available_quantity": 8,
+    "image_url": "https://images.unsplash.com/photo-1526279096764-2a0fbcf4d64d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 6,
+    "title": "Signals in the Snow",
+    "author": "Priya Nair",
+    "description": "How polar research helps scientists understand climate systems and changing ecosystems.",
+    "category": "Science",
+    "available_quantity": 5,
+    "image_url": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 7,
+    "title": "Harbor of Letters",
+    "author": "Sofia Laurent",
+    "description": "A librarian's map collection leads to a hidden archive and a story spanning generations.",
+    "category": "Story",
+    "available_quantity": 9,
+    "image_url": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 8,
+    "title": "Designing Secure Auth Flows",
+    "author": "Caleb Morgan",
+    "description": "A focused reference for building safer sign-in systems, sessions, and protected routes.",
+    "category": "Tech",
+    "available_quantity": 3,
+    "image_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 9,
+    "title": "The Biology of Everyday Life",
+    "author": "Leah Brooks",
+    "description": "An accessible look at how cells, microbes, and genes shape ordinary human experiences.",
+    "category": "Science",
+    "available_quantity": 10,
+    "image_url": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 10,
+    "title": "Between the Streetlights",
+    "author": "Daniel Rios",
+    "description": "Two strangers form a bond that changes the rhythm of a city block and its neighbors.",
+    "category": "Story",
+    "available_quantity": 2,
+    "image_url": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 11,
+    "title": "Frontend Performance Patterns",
+    "author": "Hana Kim",
+    "description": "Techniques for shipping responsive interfaces that stay fast under real-world pressure.",
+    "category": "Tech",
+    "available_quantity": 12,
+    "image_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 12,
+    "title": "The Shape of Evidence",
+    "author": "Owen Carter",
+    "description": "A broad science primer on how experiments, data, and peer review build trustworthy knowledge.",
+    "category": "Science",
+    "available_quantity": 1,
+    "image_url": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80"
+  }
+]
