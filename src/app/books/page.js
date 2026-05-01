@@ -16,17 +16,17 @@ export default async function BooksPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-12 px-4">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-8 sm:py-12 px-4 sm:px-0">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 overflow-hidden rounded-[2rem] border border-orange-200 bg-gradient-to-br from-orange-500 via-amber-500 to-rose-500 px-6 py-10 text-white shadow-[0_24px_80px_rgba(249,115,22,0.18)] sm:px-10 lg:px-12">
-          <div className="max-w-3xl space-y-4">
-            <span className="inline-flex rounded-full border border-white/25 bg-white/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/90">
+        <div className="mb-8 sm:mb-12 overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border border-orange-200 bg-gradient-to-br from-orange-500 via-amber-500 to-rose-500 px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-10 text-white shadow-[0_24px_80px_rgba(249,115,22,0.18)]">
+          <div className="max-w-3xl space-y-3 sm:space-y-4">
+            <span className="inline-flex rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 sm:px-4 sm:py-2 sm:text-xs lg:text-xs">
               All Books
             </span>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
               Discover your next favorite read
             </h1>
-            <p className="max-w-2xl text-base leading-7 text-white/85 sm:text-lg">
+            <p className="max-w-2xl text-sm leading-6 text-white/85 sm:text-base sm:leading-7 lg:text-lg">
               Browse the full catalog with a theme that matches the KeenKeeper home
               experience.
             </p>
