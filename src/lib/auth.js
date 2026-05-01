@@ -8,12 +8,14 @@ const mongoDatabase = process.env.MONGODB_DB || "online-book-borrowing-platform"
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
-if (!mongoUri) {
-  throw new Error("Missing MONGODB_URI environment variable.");
-}
+// Only initialize MongoDB if URI is available
+let mongoClient;
+let mongoClientPromise;
 
-const mongoClient = new MongoClient(mongoUri);
-const mongoClientPromise = mongoClient.connect();
+if (mongoUri) {
+  mongoClient = new MongoClient(mongoUri);
+  mongoClientPromise = mongoClient.connect();
+}
 
 const socialProviders = {};
 
@@ -24,23 +26,31 @@ if (googleClientId && googleClientSecret) {
   };
 }
 
-export const auth = betterAuth({
+const authConfig = {
   baseURL: authBaseUrl,
   secret: process.env.BETTER_AUTH_SECRET,
-  database: mongodbAdapter(
-    mongoClient.db(mongoDatabase),
-    {
-      client: mongoClient,
-      transaction: false,
-    }
-  ),
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
   },
   socialProviders,
-});
+};
+
+if (mongoClient) {
+  authConfig.database = mongodbAdapter(
+    mongoClient.db(mongoDatabase),
+    {
+      client: mongoClient,
+      transaction: false,
+    }
+  );
+}
+
+export const auth = betterAuth(authConfig);
 
 export async function getAuthMongoClient() {
+  if (!mongoClientPromise) {
+    throw new Error("MongoDB client not initialized. Set MONGODB_URI environment variable.");
+  }
   return mongoClientPromise;
 }

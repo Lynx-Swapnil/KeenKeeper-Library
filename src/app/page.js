@@ -13,6 +13,7 @@ const marqueeText = [
   "Browse faster with curated categories",
 ];
 
+
 export default async function Home() {
   const featuredBooks = await getFeaturedBooks(4);
 
