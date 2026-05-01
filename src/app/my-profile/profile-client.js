@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaEnvelope, FaIdBadge, FaArrowLeft } from 'react-icons/fa6';
-
-import profilePhoto from '@/assets/hassan-sherif-XD4CQZYeXNc-unsplash.jpg';
+import defaultUserImage from '@/assets/defaultUserImage.jpg';
 import { ensureBookSessionStore } from '@/lib/book-session';
 
 export default function ProfileClient({ user }) {
   const [borrowedCount, setBorrowedCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
+  const displayPhoto = user?.image || defaultUserImage;
 
   // Format date
   const formatDate = (dateString) => {
@@ -75,11 +75,12 @@ export default function ProfileClient({ user }) {
               <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center">
                 <div className="relative h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 overflow-hidden rounded-full border-3 sm:border-4 border-white/90 bg-white/20 shadow-lg shrink-0">
                   <Image
-                    src={profilePhoto}
+                    src={displayPhoto}
                     alt={user.name || 'Profile'}
                     fill
                     sizes="112px"
                     className="object-cover"
+                    unoptimized={typeof displayPhoto === 'string' && displayPhoto.startsWith('http')}
                   />
                 </div>
 

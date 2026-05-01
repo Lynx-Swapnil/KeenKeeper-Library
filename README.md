@@ -1,15 +1,29 @@
-# KeenKeeper Library
+# KeenKeeper Library Hub
 
-A modern, fully responsive digital library platform built for seamless book browsing, filtering, and borrowing experiences.
+A modern, fully responsive digital library platform built for seamless book browsing, filtering, borrowing, and profile management.
 
-## Purpose
+## Live Demo
 
-KeenKeeper Library is a contemporary digital library application designed to help users discover, filter, and borrow books with ease. It provides a smooth, intuitive interface for managing reading profiles, tracking borrowed books, and maintaining personal wishlists. The platform emphasizes user experience with a focus on speed, security, and elegant design.
+- **Production**: [keen-keeper-library-hub.vercel.app](https://keen-keeper-library-hub.vercel.app/)
+- **Local development**: `http://localhost:3000`
 
-## Live URL
+## Overview
 
-- **Development**: `http://localhost:3000`
-- **Production**: To be provided
+KeenKeeper Library Hub is a digital library application designed to help users discover, filter, and borrow books with ease. It provides a smooth, intuitive interface for managing reading profiles, tracking borrowed books, and maintaining personal wishlists. The latest version includes a refreshed landing page, featured books on the home screen, BetterAuth login, Google OAuth, and profile pages for borrowing history and wishlist management.
+
+## Latest Updates
+
+- New landing page hero and promotional sections
+- Featured books displayed on the home page
+- Dedicated books catalog with search and filtering
+- BetterAuth-powered sign in, registration, and Google OAuth
+- User profile page with borrowing and wishlist counts
+- Borrowing history and wishlist routes under `my-profile`
+- Production deployment on Vercel
+
+## Screenshots
+
+![KeenKeeper landing page](src/assets/landingPage.png)
 
 ## Key Features
 
@@ -145,8 +159,12 @@ npm install
 Create a `.env.local` file in the root directory with:
 ```
 MONGODB_URI=<your-mongodb-connection-string>
+MONGODB_DB=online-book-borrowing-platform
 BETTER_AUTH_SECRET=<your-secret-key>
 BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=<your-google-client-id>
+GOOGLE_CLIENT_SECRET=<your-google-client-secret>
 ```
 
 4. Run the development server:
@@ -174,7 +192,7 @@ npm run lint     # Run ESLint for code quality checks
 - Users can register with email, password, and profile photo URL
 - Password requirements: minimum 8 characters with at least one uppercase letter
 - Google OAuth integration for quick registration/login
-- Secure session management with automatic expiration
+- Secure session management with BetterAuth
 
 ### Book Management
 - Books are stored in MongoDB with availability tracking
