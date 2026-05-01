@@ -1,27 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 import Toast from '@/components/toast';
-
-function ensureSessionStore() {
-  if (typeof window === 'undefined') return null;
-  if (!window.__keenkeeper_session) {
-    window.__keenkeeper_session = { borrowed: {}, wishlist: {} };
-  }
-  return window.__keenkeeper_session;
-}
-
-function addBookToSession(storeKey, userEmail, bookId) {
-  const session = ensureSessionStore();
-  if (!session || !userEmail) return;
-  if (!session[storeKey][userEmail]) session[storeKey][userEmail] = [];
-  const list = session[storeKey][userEmail];
-  if (!list.includes(bookId)) list.push(bookId);
-}
+import { FaHeart, FaRegHeart } from 'react-icons/fa6';
+import {
+  addBookToSession,
+  decrementAvailableCount,
+  ensureBookSessionStore,
+  getAvailableCount,
+  isBookInSession,
+} from '@/lib/book-session';
 
 export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
   const router = useRouter();
@@ -30,6 +22,30 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
   const [showToast, setShowToast] = useState(false);
   const [isBorrowDisabled, setIsBorrowDisabled] = useState(false);
   const [isWishlistDisabled, setIsWishlistDisabled] = useState(false);
+  const [availableCount, setAvailableCount] = useState(book.available_quantity);
+
+  useEffect(() => {
+    if (!isAuthenticated || !userEmail) return;
+
+    const syncButtonState = () => {
+      setIsBorrowDisabled(isBookInSession('borrowed', userEmail, book.id));
+      setIsWishlistDisabled(isBookInSession('wishlist', userEmail, book.id));
+      setAvailableCount(getAvailableCount(book.id, book.available_quantity));
+    };
+
+    ensureBookSessionStore();
+    syncButtonState();
+
+    const onStorage = () => syncButtonState();
+    window.addEventListener('storage', onStorage);
+
+    const interval = setInterval(syncButtonState, 800);
+
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      clearInterval(interval);
+    };
+  }, [book.id, book.available_quantity, isAuthenticated, userEmail]);
 
   const handleBorrow = async () => {
     if (!isAuthenticated) {
@@ -42,11 +58,20 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
       return;
     }
 
+    if (availableCount <= 0) {
+      setToastMessage('No copies are available right now');
+      setToastType('warning');
+      setShowToast(true);
+      return;
+    }
+
     setToastMessage(`"${book.title}" has been added to your borrowing queue!`);
     setToastType('success');
     setShowToast(true);
 
     addBookToSession('borrowed', userEmail, book.id);
+    decrementAvailableCount(book.id, book.available_quantity);
+    setAvailableCount((current) => Math.max(0, current - 1));
     setIsBorrowDisabled(true);
   };
 
@@ -70,15 +95,15 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
   };
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-12 px-4">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.1),transparent_34%),linear-gradient(180deg,#fffaf5_0%,#fffdfb_42%,#fff7ed_100%)] py-8 sm:py-12 px-4 sm:px-0 lg:px-0">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link
           href="/books"
-          className="mb-8 inline-flex items-center font-medium text-orange-600 hover:text-orange-700"
+          className="mb-6 sm:mb-8 inline-flex items-center gap-1 sm:gap-2 font-medium text-orange-600 hover:text-orange-700 text-xs sm:text-sm"
         >
           <svg
-            className="mr-2 h-5 w-5"
+            className="h-3 w-3 sm:h-5 sm:w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -94,11 +119,11 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
         </Link>
 
         {/* Book Details */}
-        <div className="overflow-hidden rounded-[2rem] border border-orange-200 bg-white/90 shadow-[0_24px_80px_rgba(249,115,22,0.12)] backdrop-blur-sm">
-          <div className="grid grid-cols-1 gap-8 p-8 md:grid-cols-3">
+        <div className="overflow-hidden rounded-lg sm:rounded-2xl lg:rounded-4xl border border-orange-200 bg-white/90 shadow-[0_24px_80px_rgba(249,115,22,0.12)] backdrop-blur-sm">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 p-4 sm:p-6 lg:p-8 md:grid-cols-3">
             {/* Book Image */}
             <div className="md:col-span-1">
-              <div className="relative aspect-square w-full overflow-hidden rounded-[1.5rem] border border-orange-100 bg-orange-50">
+              <div className="relative aspect-square w-full overflow-hidden rounded-lg sm:rounded-2xl lg:rounded-3xl border border-orange-100 bg-orange-50">
                 {book.image_url ? (
                   <Image
                     src={book.image_url}
@@ -108,8 +133,8 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
                     priority
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-100 via-amber-50 to-rose-100">
-                    <span className="text-sm font-medium text-orange-500">No Image</span>
+                  <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-orange-100 via-amber-50 to-rose-100">
+                    <span className="text-xs sm:text-sm font-medium text-orange-500">No Image</span>
                   </div>
                 )}
               </div>
@@ -117,13 +142,13 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
 
             {/* Book Info */}
             <div className="md:col-span-2">
-              <h1 className="mb-2 text-4xl font-bold tracking-tight text-slate-950">{book.title}</h1>
-              <p className="mb-4 text-xl text-slate-600">by {book.author}</p>
+              <h1 className="mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-950">{book.title}</h1>
+              <p className="mb-4 text-base sm:text-lg lg:text-xl text-slate-600">by {book.author}</p>
 
               {/* Category Badge */}
               {book.category && (
                 <div className="mb-6">
-                  <span className="inline-block rounded-full border border-orange-200 bg-orange-50 px-4 py-1 text-sm font-semibold text-orange-700">
+                  <span className="inline-block rounded-full border border-orange-200 bg-orange-50 px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-semibold text-orange-700">
                     {book.category}
                   </span>
                 </div>
@@ -131,45 +156,45 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
 
               {/* Description */}
               <div className="mb-6">
-                <h2 className="mb-3 text-xl font-semibold text-slate-950">Description</h2>
-                <p className="leading-relaxed text-slate-700">{book.description}</p>
+                <h2 className="mb-2 sm:mb-3 text-base sm:text-lg lg:text-xl font-semibold text-slate-950">Description</h2>
+                <p className="text-sm sm:text-base leading-relaxed text-slate-700">{book.description}</p>
               </div>
 
               {/* Availability */}
-              <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                <p className="text-amber-900">
+              <div className="mb-6 rounded-lg sm:rounded-2xl border border-amber-200 bg-amber-50 p-3 sm:p-4">
+                <p className="text-xs sm:text-sm text-amber-900">
                   <span className="font-semibold">Available Copies:</span>{' '}
-                  {book.available_quantity}
+                  {availableCount}
                 </p>
               </div>
 
               {/* Auth Status Notice */}
               {!isAuthenticated && (
-                <div className="mb-6 rounded-2xl border border-orange-200 bg-orange-50 p-4">
-                  <p className="text-amber-900">
+                <div className="mb-6 rounded-lg sm:rounded-2xl border border-orange-200 bg-orange-50 p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-amber-900">
                     <span className="font-semibold">Log in required</span> to borrow this book
                   </p>
                 </div>
               )}
 
               {/* Action Buttons */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 {book.available_quantity > 0 ? (
                   <button
                     onClick={handleBorrow}
-                    disabled={isBorrowDisabled}
-                    className={
-                      isBorrowDisabled
-                        ? "cursor-not-allowed rounded-full bg-slate-200 px-6 py-3 font-semibold text-slate-500"
-                        : "rounded-full bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 px-6 py-3 font-semibold text-white shadow-[0_12px_30px_rgba(249,115,22,0.25)] transition hover:brightness-105"
-                    }
+                    disabled={isBorrowDisabled || availableCount <= 0}
+                    className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition ${
+                      isBorrowDisabled || availableCount <= 0
+                        ? "cursor-not-allowed bg-slate-200 text-slate-500"
+                        : "bg-linear-to-r from-orange-500 via-amber-500 to-rose-500 text-white shadow-[0_12px_30px_rgba(249,115,22,0.25)] hover:brightness-105"
+                    }`}
                   >
-                    {isBorrowDisabled ? "Borrowed" : "Borrow This Book"}
+                    {isBorrowDisabled ? 'Borrowed' : availableCount <= 0 ? 'No Copies Left' : 'Borrow This Book'}
                   </button>
                 ) : (
                   <button
                     disabled
-                    className="cursor-not-allowed rounded-full bg-slate-200 px-6 py-3 font-semibold text-slate-500"
+                    className="cursor-not-allowed rounded-full bg-slate-200 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-slate-500"
                   >
                     Currently Unavailable
                   </button>
@@ -177,13 +202,19 @@ export default function BookDetailClient({ book, isAuthenticated, userEmail }) {
                 <button
                   onClick={handleAddWishlist}
                   disabled={isWishlistDisabled}
-                  className={
+                  className={`inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition ${
                     isWishlistDisabled
-                      ? "cursor-not-allowed rounded-full border-2 border-orange-200 bg-slate-100 px-6 py-3 font-semibold text-slate-400"
-                      : "rounded-full border-2 border-orange-500 px-6 py-3 font-semibold text-orange-600 transition hover:bg-orange-50"
-                  }
+                      ? "cursor-not-allowed border-2 border-orange-200 bg-slate-100 text-slate-400"
+                      : "border-2 border-orange-500 text-orange-600 hover:bg-orange-50"
+                  }`}
                 >
-                  {isWishlistDisabled ? "Wishlisted" : "Add to Wishlist"}
+                  {isWishlistDisabled ? (
+                    <FaHeart aria-hidden="true" className="text-sm sm:text-base text-orange-400" />
+                  ) : (
+                    <FaRegHeart aria-hidden="true" className="text-sm sm:text-base" />
+                  )}
+                  <span className="hidden sm:inline">{isWishlistDisabled ? "Wishlisted" : "Add to Wishlist"}</span>
+                  <span className="sm:hidden">{isWishlistDisabled ? "Wishlisted" : "Wishlist"}</span>
                 </button>
               </div>
             </div>
