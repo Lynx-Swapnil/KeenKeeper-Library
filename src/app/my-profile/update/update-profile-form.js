@@ -49,14 +49,14 @@ export default function UpdateProfileForm({ user }) {
   };
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-12 px-4">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-8 sm:py-12 px-4 lg:px-0">
       <div className="max-w-2xl mx-auto animate__animated animate__fadeInUp">
         <Link
           href="/my-profile"
-          className="mb-8 inline-flex items-center font-medium text-orange-600 hover:text-orange-700"
+          className="mb-6 sm:mb-8 inline-flex items-center gap-1 sm:gap-2 font-medium text-orange-600 hover:text-orange-700 text-xs sm:text-sm"
         >
           <svg
-            className="w-5 h-5 mr-2"
+            className="w-3 h-3 sm:w-5 sm:h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -71,15 +71,15 @@ export default function UpdateProfileForm({ user }) {
           Back to My Profile
         </Link>
 
-        <section className="rounded-[2rem] border border-orange-200 bg-white/90 p-8 shadow-[0_24px_80px_rgba(249,115,22,0.12)] backdrop-blur-sm">
-          <h1 className="mb-2 text-3xl font-bold tracking-tight text-slate-950">Update Information</h1>
-          <p className="mb-8 text-slate-600">
+        <section className="rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border border-orange-200 bg-white/90 p-5 sm:p-6 lg:p-8 shadow-[0_24px_80px_rgba(249,115,22,0.12)] backdrop-blur-sm">
+          <h1 className="mb-2 text-2xl sm:text-3xl font-bold tracking-tight text-slate-950">Update Information</h1>
+          <p className="mb-6 sm:mb-8 text-xs sm:text-sm text-slate-600">
             Change your display name and profile image using BetterAuth user update.
           </p>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                 Name
               </label>
               <input
@@ -88,12 +88,12 @@ export default function UpdateProfileForm({ user }) {
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="Your full name"
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-300 focus:bg-white"
+                className="w-full rounded-lg sm:rounded-xl lg:rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 sm:px-4 sm:py-3 text-sm text-slate-900 outline-none transition focus:border-orange-300 focus:bg-white"
               />
             </div>
 
             <div>
-              <label htmlFor="image" className="mb-2 block text-sm font-medium text-slate-700">
+              <label htmlFor="image" className="mb-2 block text-xs sm:text-sm font-medium text-slate-700">
                 Image URL
               </label>
               <input
@@ -102,18 +102,18 @@ export default function UpdateProfileForm({ user }) {
                 value={image}
                 onChange={(event) => setImage(event.target.value)}
                 placeholder="https://example.com/avatar.png"
-                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-orange-300 focus:bg-white"
+                className="w-full rounded-lg sm:rounded-xl lg:rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2.5 sm:px-4 sm:py-3 text-sm text-slate-900 outline-none transition focus:border-orange-300 focus:bg-white"
               />
             </div>
 
             {errorMessage ? (
-              <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+              <p className="rounded-lg sm:rounded-xl lg:rounded-2xl border border-rose-200 bg-rose-50 px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-rose-700">
                 {errorMessage}
               </p>
             ) : null}
 
             {successMessage ? (
-              <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+              <p className="rounded-lg sm:rounded-xl lg:rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm text-emerald-700">
                 {successMessage}
               </p>
             ) : null}
@@ -121,7 +121,7 @@ export default function UpdateProfileForm({ user }) {
             <button
               type="submit"
               disabled={isUpdating}
-              className="w-full rounded-full bg-slate-950 px-6 py-3 font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
+              className="w-full rounded-full bg-slate-950 px-4 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isUpdating ? 'Updating...' : 'Update Information'}
             </button>
