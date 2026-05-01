@@ -96,7 +96,7 @@ export default function LoginForm({ registrationSuccess }) {
           </div>
         </div>
 
-        <div className="rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border border-white/70 bg-white/90 p-5 sm:p-6 lg:p-8 shadow-[0_20px_70px_rgba(15,23,42,0.12)]">
+        <div className="rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-white/70 bg-white/90 p-5 sm:p-6 lg:p-8 shadow-[0_20px_70px_rgba(15,23,42,0.12)]">
           <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
             <div>
               <label className="mb-2 block text-xs font-semibold text-slate-700 sm:text-sm" htmlFor="email">

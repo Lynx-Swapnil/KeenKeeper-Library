@@ -3,7 +3,7 @@ import BackButton from "../components/back-button";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-orange-50 px-4 py-24">
+    <main className="min-h-screen flex items-center justify-center bg-linear-to-br from-white to-orange-50 px-4 py-24">
       <div className="max-w-3xl text-center">
         <div className="inline-flex items-center justify-center h-36 w-36 rounded-full bg-orange-100/60 border border-orange-200 mx-auto mb-6">
           <svg className="h-16 w-16 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">

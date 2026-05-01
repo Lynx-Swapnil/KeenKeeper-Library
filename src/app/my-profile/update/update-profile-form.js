@@ -49,7 +49,7 @@ export default function UpdateProfileForm({ user }) {
   };
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-8 sm:py-12 px-4 lg:px-0">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.1),transparent_34%),linear-gradient(180deg,#fffaf5_0%,#fffdfb_42%,#fff7ed_100%)] py-8 sm:py-12 px-4 lg:px-0">
       <div className="max-w-2xl mx-auto animate__animated animate__fadeInUp">
         <Link
           href="/my-profile"
@@ -71,7 +71,7 @@ export default function UpdateProfileForm({ user }) {
           Back to My Profile
         </Link>
 
-        <section className="rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border border-orange-200 bg-white/90 p-5 sm:p-6 lg:p-8 shadow-[0_24px_80px_rgba(249,115,22,0.12)] backdrop-blur-sm">
+        <section className="rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-orange-200 bg-white/90 p-5 sm:p-6 lg:p-8 shadow-[0_24px_80px_rgba(249,115,22,0.12)] backdrop-blur-sm">
           <h1 className="mb-2 text-2xl sm:text-3xl font-bold tracking-tight text-slate-950">Update Information</h1>
           <p className="mb-6 sm:mb-8 text-xs sm:text-sm text-slate-600">
             Change your display name and profile image using BetterAuth user update.

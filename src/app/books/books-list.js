@@ -85,7 +85,7 @@ export default function BooksList({ initialBooks }) {
                       }}
                       className={`w-full text-left rounded-lg px-3 py-2 text-sm font-medium transition ${
                         selectedCategory === category
-                          ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 text-white shadow'
+                          ? 'bg-linear-to-r from-orange-500 via-amber-500 to-rose-500 text-white shadow'
                           : 'bg-slate-50 text-slate-700 hover:bg-orange-50 hover:text-orange-700'
                       }`}
                     >
@@ -108,7 +108,7 @@ export default function BooksList({ initialBooks }) {
                   onClick={() => setSelectedCategory(category)}
                   className={`w-full text-left rounded-lg px-3 py-2 lg:px-4 lg:py-2.5 text-xs lg:text-sm font-medium transition ${
                     selectedCategory === category
-                      ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 text-white shadow'
+                      ? 'bg-linear-to-r from-orange-500 via-amber-500 to-rose-500 text-white shadow'
                       : 'bg-slate-50 text-slate-700 hover:bg-orange-50 hover:text-orange-700'
                   }`}
                 >
@@ -135,7 +135,7 @@ export default function BooksList({ initialBooks }) {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-100 via-amber-100 to-rose-100">
+                    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-orange-100 via-amber-100 to-rose-100">
                       <span className="text-xs sm:text-sm text-slate-400">No Image</span>
                     </div>
                   )}

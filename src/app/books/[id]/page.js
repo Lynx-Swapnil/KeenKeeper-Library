@@ -73,7 +73,7 @@ export default async function BookDetailPage({ params }) {
 
   if (error || !book) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 py-12 px-4">
+      <main className="min-h-screen bg-linear-to-br from-purple-50 via-pink-50 to-blue-50 py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center py-12">
             <p className="text-gray-600 text-lg mb-4">{error || 'Book not found'}</p>

@@ -16,9 +16,9 @@ export default async function BooksPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.1),_transparent_34%),linear-gradient(180deg,_#fffaf5_0%,_#fffdfb_42%,_#fff7ed_100%)] py-8 sm:py-12 px-4 sm:px-0">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.1),transparent_34%),linear-gradient(180deg,#fffaf5_0%,#fffdfb_42%,#fff7ed_100%)] py-8 sm:py-12 px-4 sm:px-0">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 sm:mb-12 overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border border-orange-200 bg-gradient-to-br from-orange-500 via-amber-500 to-rose-500 px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-10 text-white shadow-[0_24px_80px_rgba(249,115,22,0.18)]">
+        <div className="mb-8 sm:mb-12 overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-orange-200 bg-linear-to-br from-orange-500 via-amber-500 to-rose-500 px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-10 text-white shadow-[0_24px_80px_rgba(249,115,22,0.18)]">
           <div className="max-w-3xl space-y-3 sm:space-y-4">
             <span className="inline-flex rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 sm:px-4 sm:py-2 sm:text-xs lg:text-xs">
               All Books

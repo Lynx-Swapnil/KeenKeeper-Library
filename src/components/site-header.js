@@ -249,7 +249,7 @@ export default function SiteHeader() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`rounded-lg px-4 py-2.5 text-sm font-medium transition ${
                   isActiveLink(link.href)
-                    ? "bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 text-white"
+                    ? "bg-linear-to-r from-orange-500 via-amber-500 to-rose-500 text-white"
                     : "text-slate-700 hover:bg-orange-50 hover:text-orange-600"
                 }`}
               >

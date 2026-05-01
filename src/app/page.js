@@ -18,7 +18,7 @@ export default async function Home() {
 
   return (
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-12 px-4 py-8 sm:py-12 lg:px-8 lg:py-16">
-      <div className="overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border border-orange-200 bg-gradient-to-br from-orange-500 via-amber-500 to-rose-500 px-5 py-10 sm:px-8 sm:py-12 lg:px-14 lg:py-12 text-white shadow-[0_24px_80px_rgba(249,115,22,0.28)]">
+      <div className="overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-orange-200 bg-linear-to-br from-orange-500 via-amber-500 to-rose-500 px-5 py-10 sm:px-8 sm:py-12 lg:px-14 lg:py-12 text-white shadow-[0_24px_80px_rgba(249,115,22,0.28)]">
         <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
           <div className="space-y-4 sm:space-y-6">
             <span className="inline-flex rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 sm:px-4 sm:py-2 sm:text-sm">
@@ -51,7 +51,7 @@ export default async function Home() {
           </div>
 
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-[1.75rem] border border-white/20 bg-white/10 p-3 sm:p-4 shadow-2xl shadow-orange-950/10 backdrop-blur-xl">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg sm:rounded-lg lg:rounded-[1.5rem] bg-orange-100/20">
+            <div className="relative aspect-4/3 overflow-hidden rounded-lg sm:rounded-lg lg:rounded-3xl bg-orange-100/20">
               <Image
                 src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1200&q=80"
                 alt="Stack of books in a warm library theme"
@@ -60,7 +60,7 @@ export default async function Home() {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-orange-950/35 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-orange-950/35 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 rounded-lg sm:rounded-2xl border border-white/20 bg-black/20 px-3 py-2 sm:px-4 sm:py-3 text-left text-white backdrop-blur-md">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-orange-200 sm:text-sm">
                   Curated Reads
@@ -113,7 +113,7 @@ export default async function Home() {
               key={book.id}
               className="group overflow-hidden rounded-lg sm:rounded-xl lg:rounded-[1.75rem] border border-white/70 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                <div className="relative aspect-4/3 overflow-hidden bg-slate-100">
                 <Image
                   src={book.image_url}
                   alt={book.title}
